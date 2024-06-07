@@ -82,7 +82,7 @@ spec:
               echo "Copying files from dokuwiki to backup-pvc..."
 
               # Ensure the destination directory exists
-              DEST_DIR="{{$.Values.sharedCronjobConfig.destinationBackupDirectory}}/{{$cronjob.backupName}}"
+              DEST_DIR="{{$.Values.sharedCronjobConfig.destinationBackupDirectory}}/{{$cronjob.name}}"
               mkdir -p "$DEST_DIR"
 
               # Copy new or changed files to the daily backup directory
