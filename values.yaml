@@ -6,7 +6,11 @@
 backupcontainer:
   name: backup-box
   image: busybox:latest
-  command: ["/bin/sh", "-c", "touch /tmp/healthy && sleep infinity"] # Init healthcheck and sleep indefinitely
+  command: [
+      "/bin/sh",
+      "-c",
+      "touch /tmp/healthy && while true; do sleep 3600; done",
+    ] # Init healthcheck and sleep
   resources:
     requests:
       memory: "64Mi"
