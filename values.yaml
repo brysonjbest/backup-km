@@ -6,7 +6,7 @@
 backupcontainer:
   name: backup-box
   image: busybox:latest
-  command: ["sleep", "infinity"] # Command to run within the container, here sleeping indefinitely
+  command: ["/bin/sh", "-c", "touch /tmp/healthy && sleep infinity"] # Init healthcheck and sleep indefinitely
   resources:
     requests:
       memory: "64Mi"
@@ -52,14 +52,14 @@ cronjobs:
   - name: weekly
     enabled: true
     schedule: "0 4 * * 1" # Schedule to run weekly on Mondays at 4am
-    successfulJobsHistoryLimit: 1
-    failedJobsHistoryLimit: 1
+    successfulJobsHistoryLimit: 3
+    failedJobsHistoryLimit: 3
     daysToRetain: 30
   - name: monthly
     enabled: true
     schedule: "0 6 1 * *" # Schedule to run monthly on the 1st at 6am
-    successfulJobsHistoryLimit: 1
-    failedJobsHistoryLimit: 1
+    successfulJobsHistoryLimit: 3
+    failedJobsHistoryLimit: 3
     daysToRetain: 365
 
 ## Configuration for the persistent volume claim (PVC)
